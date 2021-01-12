@@ -36,7 +36,6 @@ export const usePlaidEmitter = (LinkEventListener: LinkEventListener) => {
   }, []);
 };
 
-
 export const openLink = async (props: PlaidLinkProps) => {
   let config = props.tokenConfig ? props.tokenConfig : props.publicKeyConfig!;
   if (Platform.OS === 'android') {
@@ -71,11 +70,10 @@ export const openLink = async (props: PlaidLinkProps) => {
             props.onExit(result);
           }
         }
-      }
+      },
     );
   }
 };
-
 
 export const dismissLink = () => {
   if (Platform.OS === 'ios') {
@@ -101,5 +99,10 @@ export const useDeepLinkRedirector = () => {
 
 export const PlaidLink = (props: PlaidLinkComponentProps) => {
   useDeepLinkRedirector();
-  return <Pressable onPress={() => openLink(props)}>{props.children}</Pressable>;
+  const Touchable = props.TouchableComponent
+    ? props.TouchableComponent
+    : Pressable;
+  return (
+    <Touchable onPress={() => openLink(props)}>{props.children}</Touchable>
+  );
 };

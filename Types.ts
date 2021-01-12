@@ -1,3 +1,5 @@
+import { PressableProps } from "react-native";
+
 interface CommonPlaidLinkOptions {
     logLevel?: LinkLogLevel;
     extras?: Record<string, any>;
@@ -236,14 +238,14 @@ export interface LinkSuccess {
 export interface LinkSuccessMetadata {
     institution?: LinkInstitution;
     accounts: LinkAccount[];
-    linkSessionId: String;
-    metadataJson?: String;
+    linkSessionId: string;
+    metadataJson?: string;
 }
 
 export interface LinkAccount {
-    id: String;
-    name?: String;
-    mask?: String;
+    id: string;
+    name?: string;
+    mask?: string;
     type: LinkAccountType;
     subtype: LinkAccountSubtype;
     verificationStatus?: LinkAccountVerificationStatus;
@@ -256,8 +258,8 @@ export enum LinkAccountVerificationStatus {
 }
 
 export interface LinkInstitution {
-    id: String;
-    name: String;
+    id: string;
+    name: string;
 }
 
 export interface LinkExit {
@@ -270,7 +272,7 @@ export interface LinkExitMetadata {
     institution?: LinkInstitution;
     linkSessionId: string;
     requestId: string;
-    metadataJson?: String;
+    metadataJson?: string;
 }
 
 export enum LinkExitMetadataStatus {
@@ -483,6 +485,9 @@ export interface PlaidLinkProps {
     onExit?: LinkExitListener
 }
 
-export type PlaidLinkComponentProps = (PlaidLinkProps & {
-    children: React.ReactNode
-});
+export type PlaidLinkComponentProps = PlaidLinkProps & {
+    children: React.ReactNode;
+    TouchableComponent?:
+      | React.ComponentType
+      | React.ForwardRefExoticComponent<PressableProps>;
+  };
